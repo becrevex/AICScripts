@@ -1,0 +1,26 @@
+use auxiliary/admin/http/cnpilot_r_cmd_exec
+run
+use auxiliary/admin/http/cnpilot_r_fpt
+run
+use auxiliary/scanner/http/cnpilot_r_web_login_loot
+run
+use auxiliary/scanner/http/epmp1000_cmd_exec
+run
+use auxiliary/scanner/http/epmp1000_dump_config
+run
+use auxiliary/scanner/http/epmp1000_dump_hashes
+run
+use auxiliary/scanner/http/epmp1000_get_chart_cmd_exec
+run
+use auxiliary/scanner/http/epmp1000_ping_cmd_exec
+run
+use auxiliary/scanner/http/epmp1000_reset_pass
+run
+use auxiliary/scanner/http/epmp1000_web_login
+run
+use auxiliary/scanner/snmp/cambium_snmp_loot
+run
+use auxiliary/scanner/snmp/cnpilot_r_snmp_loot
+run
+use auxiliary/scanner/snmp/epmp1000_snmp_loot
+run

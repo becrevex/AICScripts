@@ -1,0 +1,10 @@
+use auxiliary/scanner/http/apache_activemq_source_disclosure
+run
+use auxiliary/scanner/http/apache_activemq_traversal
+run
+use auxiliary/scanner/http/apache_mod_cgi_bash_env
+run
+use auxiliary/scanner/http/apache_optionsbleed
+run
+use auxiliary/scanner/http/apache_userdir_enum
+run

@@ -1,0 +1,25 @@
+use auxiiliary/gather/impersonate_ssl
+run
+use auxiiliary/gather/ssllabs_scan
+run
+use auxiiliary/scanner/http/cisco_ssl_vpn
+run
+use auxiiliary/scanner/http/cisco_ssl_vpn_priv_esc
+run
+use auxiiliary/scanner/http/ssl
+run
+use auxiiliary/scanner/http/ssl_version
+run
+use auxiiliary/scanner/sap/sap_mgmt_con_getprocesslist
+run
+use auxiiliary/scanner/ssl/bleichenbacher_oracle
+run
+use auxiiliary/scanner/ssl/openssl_ccs
+run
+use auxiiliary/scanner/ssl/openssl_heartbleed
+run
+use auxiiliary/server/openssl_altchainsforgery_mitm_proxy
+run
+use auxiiliary/server/openssl_heartbeat_client_memory
+run
+

@@ -1,0 +1,6 @@
+use auxiliary/scanner/http/owa_ews_login
+run
+use auxiliary/scanner/http/owa_iis_internal_ip
+run
+use auxiliary/scanner/http/owa_login
+run

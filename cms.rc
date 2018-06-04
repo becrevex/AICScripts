@@ -1,0 +1,8 @@
+use auxiliary/admin/sunrpc/solaris_kcms_readfile
+run
+use auxiliary/scanner/http/ektron_cms400net
+run
+use auxiliary/scanner/http/s40_traversal
+run
+use auxiliary/scanner/http/vcms_login
+run

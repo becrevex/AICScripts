@@ -1,0 +1,32 @@
+use auxiliary/admin/hp/hp_data_protector_cmd
+run
+use auxiliary/admin/hp/hp_imc_som_create_account
+run
+use auxiliary/admin/http/hp_web_jetadmin_exec
+run
+use auxiliary/dos/hp/data_protector_rds
+run
+use auxiliary/gather/hp_enum_perfd
+run
+use auxiliary/gather/hp_snac_domain_creds
+run
+use auxiliary/scanner/http/hp_imc_bims_downloadservlet_traversal
+run
+use auxiliary/scanner/http/hp_imc_faultdownloadservlet_traversal
+run
+use auxiliary/scanner/http/hp_imc_ictdownloadservlet_traversal
+run
+use auxiliary/scanner/http/hp_imc_reportimgservlt_traversal
+run
+use auxiliary/scanner/http/hp_imc_som_file_download
+run
+use auxiliary/scanner/http/hp_sitescope_getfileinternal_fileaccess
+run
+use auxiliary/scanner/http/hp_sitescope_getsitescopeconfiguration
+run
+use auxiliary/scanner/http/hp_sitescope_loadfilecontent_fileaccess
+run
+use auxiliary/scanner/http/hp_sys_mgmt_login
+run
+use auxiliary/scanner/snmp/snmp_enum_hp_laserjet
+run

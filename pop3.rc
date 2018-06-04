@@ -1,0 +1,4 @@
+use auxiliary/scanner/pop3/pop3_login
+run
+use auxiliary/scanner/pop3/pop3_version
+run

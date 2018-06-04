@@ -1,0 +1,49 @@
+services -S http -R
+resource /root/xscripts/msf/msf_http_recon.rc
+services -S mssql -R
+resource /root/xscripts/msf/msf_mssql_recon.rc
+services -S ssh -R
+resource /root/xscripts/msf/msf_ssh_recon.rc
+services -S mysql -R
+resource /root/xscripts/msf/msf_mysql_recon.rc
+services -S microsoft-ds -R
+resource /root/xscripts/msf/msf_smb_recon.rc
+services -S apache -R
+resource /root/xscripts/msf/apache.rc
+services -S wordpress -R
+resource /root/xscripts/msf/wordpress.rc
+services -S oracle -R
+resource /root/xscripts/msf/oracle.rc
+services -S ftp -R
+resource /root/xscripts/msf/ftp.rc
+services -S snmp -R
+resource /root/xscripts/msf/snmp.rc
+services -S telnet -R
+resource /root/xscripts/msf/telnet.rc
+services -S https -R
+resource /root/xscripts/msf/ssl.rc
+services -S pop3 -R
+resource /root/xscripts/msf/pop3.rc
+services -S nfs -R
+resource /root/xscripts/msf/nfs.rc
+services -S ntp -R
+resource /root/xscripts/msf/ntp.rc
+services -S postgres -R
+resource /root/xscripts/msf/postgres.rc
+services -S tomcat -R
+resource /root/xscripts/msf/tomcat.rc
+services -S vnc -R
+resource /root/xscripts/msf/vnc.rc
+services -S vmware -R
+resource /root/xscripts/msf/vmware.rc
+services -S rlogin -R
+resource /root/xscripts/msf/rlogin.rc
+services -S HP -R
+resource /root/xscripts/msf/hp.rc
+services -S CMS -R
+resource /root/xscripts/msf/cms.rc
+services -S Cambium -R
+resource /root/xscripts/msf/cambium.rc
+services -S JBoss -R
+resource /root/xscripts/msf/jboss.rc
+
