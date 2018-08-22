@@ -1,0 +1,18 @@
+use auxiliary/scanner/snmp/cambium_snmp_loot
+run
+use auxiliary/scanner/snmp/cnpilot_r_snmp_loot
+run
+use auxiliary/scanner/snmp/epmp1000_snmp_loot
+run
+use auxiliary/scanner/snmp/sbg6580_enum
+run
+use auxiliary/scanner/snmp/snmp_enum
+run
+use auxiliary/scanner/snmp/snmp_enum_hp_laserjet
+run
+use auxiliary/scanner/snmp/snmp_enumshares
+run
+use auxiliary/scanner/snmp/snmp_enumusers
+run
+use auxiliary/scanner/snmp/xerox_workcentre_enumusers
+run

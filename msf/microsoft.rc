@@ -1,0 +1,30 @@
+use auxiliary/dos/pptp/ms02_063_pptp_dos
+run
+use auxiliary/dos/windows/smtp/ms06_019_exchange
+run
+use auxiliary/scanner/http/dir_webdav_unicode_bypass
+run
+use auxiliary/scanner/http/ms09_020_webdav_unicode_bypass
+run
+use auxiliary/admin/http/iis_auth_bypass
+run
+use auxiliary/dos/windows/rdp/ms12_020_maxchannelids
+run
+use auxiliary/scanner/rdp/ms12_020_check
+run
+use auxiliary/admin/kerberos/ms14_068_kerberos_checksum
+run
+use auxiliary/gather/ms14_052_xmldom
+run
+use auxiliary/dos/http/ms15_034_ulonglongadd
+run
+use auxiliary/gather/ie_uxss_injection
+run
+use auxiliary/scanner/http/ms15_034_http_sys_memory_dump
+run
+use auxiliary/server/ms15_134_mcl_leak
+run
+use auxiliary/admin/smb/ms17_010_command
+run
+use auxiliary/scanner/smb/smb_ms17_010
+run

@@ -1,0 +1,49 @@
+services -S http -R
+resource /opt/EnumScripts/msf_http_recon.rc
+services -S mssql -R
+resource /opt/EnumScripts/msf_mssql_recon.rc
+services -S ssh -R
+resource /opt/EnumScripts/msf_ssh_recon.rc
+services -S mysql -R
+resource /opt/EnumScripts/msf_mysql_recon.rc
+services -S microsoft-ds -R
+resource /opt/EnumScripts/msf_smb_recon.rc
+services -S apache -R
+resource /opt/EnumScripts/apache.rc
+services -S wordpress -R
+resource /opt/EnumScripts/wordpress.rc
+services -S oracle -R
+resource /opt/EnumScripts/oracle.rc
+services -S ftp -R
+resource /opt/EnumScripts/ftp.rc
+services -S snmp -R
+resource /opt/EnumScripts/snmp.rc
+services -S telnet -R
+resource /opt/EnumScripts/telnet.rc
+services -S https -R
+resource /opt/EnumScripts/ssl.rc
+services -S pop3 -R
+resource /opt/EnumScripts/pop3.rc
+services -S nfs -R
+resource /opt/EnumScripts/nfs.rc
+services -S ntp -R
+resource /opt/EnumScripts/ntp.rc
+services -S postgres -R
+resource /opt/EnumScripts/postgres.rc
+services -S tomcat -R
+resource /opt/EnumScripts/tomcat.rc
+services -S vnc -R
+resource /opt/EnumScripts/vnc.rc
+services -S vmware -R
+resource /opt/EnumScripts/vmware.rc
+services -S rlogin -R
+resource /opt/EnumScripts/rlogin.rc
+services -S HP -R
+resource /opt/EnumScripts/hp.rc
+services -S CMS -R
+resource /opt/EnumScripts/cms.rc
+services -S Cambium -R
+resource /opt/EnumScripts/cambium.rc
+services -S JBoss -R
+resource /opt/EnumScripts/jboss.rc
+

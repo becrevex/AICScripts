@@ -1,0 +1,6 @@
+use auxiliary/scanner/http/webdav_internal_ip
+run
+use auxiliary/scanner/http/webdav_scanner
+run
+use auxiliary/scanner/http/webdav_website_content
+run

@@ -1,0 +1,42 @@
+use auxiliary/admin/http/linksys_e1500_e2500_exec
+run
+use auxiliary/admin/http/linksys_tmunblock_admin_reset_bof
+run
+use auxiliary/admin/http/linksys_wrt54gl_exec
+run
+use auxiliary/scanner/http/linksys_e1500_traversal
+run
+use auxiliary/admin/http/netgear_soap_password_extractor
+run
+use auxiliary/admin/http/nuuo_nvrmini_reset
+run
+use auxiliary/scanner/http/netgear_sph200d_traversal
+run
+use auxiliary/bnat/bnat_router
+run
+use auxiliary/scanner/discovery/ipv6_neighbor_router_advertisement
+run
+use auxiliary/scanner/sap/sap_router_info_request
+run
+use auxiliary/scanner/sap/sap_router_portscanner
+run
+use auxiliary/scanner/http/sentry_cdu_enum
+run
+use auxiliary/scanner/tftp/ipswitch_whatsupgold_tftp
+run
+use auxiliary/admin/2wire/xslt_password_reset
+run
+use auxiliary/admin/http/cnpilot_r_cmd_exec
+run
+use auxiliary/admin/http/cnpilot_r_fpt
+run
+use auxiliary/admin/http/dlink_dir_300_600_exec_noauth
+run
+use auxiliary/admin/http/dlink_dir_645_password_extractor
+run
+use auxiliary/admin/http/dlink_dsl320b_password_extractor
+run
+use auxiliary/admin/vxworks/dlink_i2eye_autoanswer
+run
+use auxiliary/gather/netgear_password_disclosure
+run
