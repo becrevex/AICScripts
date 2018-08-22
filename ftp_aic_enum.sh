@@ -28,7 +28,8 @@ echo -e "${GREEN}"
 echo -e "Performing standard nmap enumeration and vulnerability identification..."
 echo -e "${NC}"
 ## Perform standard nmap enumeration and vulnerability identification
-nmap -n -Pn -vv -sV $IP -p $PORT --script=ftp-anon,ftp-bounce,ftp-libopie,ftp-proftpd-backdoor,ftp-vsftpd-backdoor,ftp-vuln-cve2010-4221 -oA ./$IP/ftp_$IP-$PORT.aic
+#nmap -n -Pn -vv -sV $IP -p $PORT --script=ftp-anon,ftp-bounce,ftp-libopie,ftp-proftpd-backdoor,ftp-vsftpd-backdoor,ftp-vuln-cve2010-4221 -oA ./$IP/ftp_$IP-$PORT.aic
+nmap -n -Pn -vv -sV $IP -p $PORT --script='ftp-*' -oA ./$IP/ftp_$IP.aic
 echo -e "${GREEN}"
 echo -e "Brute forcing the target..."
 echo -e "${NC}"
