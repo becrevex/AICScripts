@@ -1,8 +1,0 @@
-use auxiliary/scanner/http/tomcat_enum
-run
-use auxiliary/scanner/http/tomcat_mgr_login
-run
-use auxiliary/admin/http/tomcat_administration
-run
-use auxiliary/admin/http/tomcat_utf8_traversal
-run

@@ -1,3 +1,0 @@
-use auxiliary/scanner/nfs/nfsmount
-run
-

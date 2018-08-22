@@ -1,6 +1,0 @@
-use auxiliary/scanner/vnc/ard_root_pw
-run
-use auxiliary/scanner/vnc/vnc_login
-run
-use auxiliary/scanner/vnc/vnc_none_auth
-run

@@ -1,6 +1,0 @@
-use auxiliary/scanner/rservices/rexec_login
-run
-use auxiliary/scanner/rservices/rlogin_login
-run
-use auxiliary/scanner/rservices/rsh_login
-run

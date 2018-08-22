@@ -1,8 +1,0 @@
-use auxiliary/scanner/winrm/winrm_auth_methods
-run
-use auxiliary/scanner/winrm/winrm_cmd
-run
-use auxiliary/scanner/winrm/winrm_login
-run
-use auxiliary/scanner/winrm/winrm_wql
-run
