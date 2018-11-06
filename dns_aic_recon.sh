@@ -85,7 +85,6 @@ cat $TARGET.recon | grep SRV >> $TARGET.records
 # Updating Shodan
 # Configuring API Key
 #easy_install -U shodan
-#shodan init UjiUYrVvqYfqESqX0vC7Gnq1sP5mE9tu
 
 
 
