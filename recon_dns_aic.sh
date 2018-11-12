@@ -51,7 +51,7 @@ echo "Done."
 echo -e "${GREEN}"
 echo -e "[+] Running Metagoofil to search for documents (doc,pdf,txt,xls,docx,xlsx)..."
 echo -e "${NC}"
-python /opt/metagoofil/metagoofil.py -d $DOMAIN -t doc,pdf,txt,xls,docx,xlsx -l 500 -n 50 -o files | tee "$DOMAIN/$DOMAIN.meta.recon"
+python /opt/metagoofil/metagoofil.py -d $DOMAIN -t doc,pdf,txt,xls,docx,xlsx -l 500 -n 50 -o files | tee $DOMAIN/$DOMAIN.meta.recon
 echo "Done."
 
 #Running recon-ng automation script
@@ -119,22 +119,29 @@ recon-ng --no-check -r /opt/CTFScripts/run.resource
 echo -e "${GREEN}"
 echo -e "[+] Running DNSEnum..."
 echo -e "${NC}"
-dnsenum -v -r --enum $DOMAIN  >> $DOMAIN/$DOMAIN.recon
+dnsenum -v -r --enum $DOMAIN  | tee $DOMAIN/$DOMAIN.dnsenum.recon
 echo "Done."
 
 #Running DNSRecon on the domain
 echo -e "${GREEN}"
 echo -e "[+] Running DNSRecon..."
 echo -e "${NC}"
-dnsrecon -d $DOMAIN -a -s -z -t std,rvl,brt,srv,axfr,tld,snoop --threads 5 -D "/opt/SecLists/Discovery/DNS/subdomains-top1mil-5000.txt" >> $DOMAIN/$DOMAIN.recon
+dnsrecon -d $DOMAIN -a -s -z -t std,rvl,brt,srv,axfr,tld,snoop --threads 5 -D "/opt/SecLists/Discovery/DNS/subdomains-top1mil-5000.txt" | tee $DOMAIN/$DOMAIN.dnsrecon.recon
 echo "Done."
 
 #Running domLink on the domain
 echo -e "${GREEN}"
 echo -e "[+] Running domLink.py..."
 echo -e "${NC}"
-python /opt/DomLink/domLink.py -v -C aetna.com >> $DOMAIN/$DOMAIN.domlink.recon
+python /opt/DomLink/domLink.py -v -C $DOMAIN | tee $DOMAIN/$DOMAIN.domlink.recon
 echo "Done."
+
+#Running Fierce intense DNS brute force on the domain
+echo -e "${GREEN}"
+echo -e "[+] Running Fierce intense DNS brute force on the domain..."
+echo -e "${NC}"
+fierce -dns $DOMAIN -prefix /opt/SecLists/Discovery/DNS/subdomains-top1m | tee $DOMAIN/$DOMAIN.fierce.recon
+
 
 # Consolidating into one file..
 echo -e "${GREEN}"
@@ -143,6 +150,9 @@ echo -e "${NC}"
 cat /opt/CTFScripts/$DOMAIN/$DOMAIN.lst >> $DOMAIN/$DOMAIN.recon
 cat /opt/CTFScripts/$DOMAIN/$DOMAIN.whois.recon >> $DOMAIN/$DOMAIN.recon
 cat /opt/CTFScripts/$DOMAIN/$DOMAIN.harvest.recon >> $DOMAIN/$DOMAIN.recon
+cat /opt/CTFScripts/$DOMAIN/$DOMAIN.dnsenum.recon >> $DOMAIN/$DOMAIN.recon
+cat /opt/CTFScripts/$DOMAIN/$DOMAIN.dnsrecon.recon >> $DOMAIN/$DOMAIN.recon
 cat /opt/CTFScripts/$DOMAIN/$DOMAIN.domlink.recon >> $DOMAIN/$DOMAIN.recon
+cat /opt/CTFScripts/$DOMAIN/$DOMAIN.fierce.recon >> $DOMAIN/$DOMAIN.recon
 cat /opt/CTFScripts/$DOMAIN/$DOMAIN.meta.recon >> $DOMAIN/$DOMAIN.recon
 echo "Done."
