@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/bash
 
 RED='\033[1;31m'
 BLUE='\033[1;34m'
@@ -7,81 +7,142 @@ YELLOW='\033[49;93m'
 NC='\033[0m' # No Color
 
 echo -e "${YELLOW}"
-echo -e "+---_-----------------------------------------------+"
-echo -e "|  Adversarial Informatics DNS Recon & Enumeration  |"
-echo -e "|               cygienesolutions.com                |"
-echo -e "|            [Usage]: ./dns_aic_recon.sh            |"
-echo -e "+---------------------------------------------------+"
+echo -e "+---_------------------------------------------------+"
+echo -e "|     Adversarial Informatics DNS Reconnaissance     |"
+echo -e "|               cygienesolutions.com                 |"
+echo -e "|        [Usage]: ./recon_dns_aic.sh <domain>        |"
+echo -e "+----------------------------------------------------+"
 echo -e "${NC}"
 if [ $# == 0 ] ; then
+    echo -e "Description:"
+    echo -e "Performs thorough DNS Enumeration on a provided domain name."
+    echo -e "${GREEN}"
+    echo -e "[Usage]: ./recon_dns_aic.sh <domain>"
+    echo -e "${NC}"
     exit 1; fi
 
-TARGET="$1"
+DOMAIN=$1
+stamp=$(date)
+#+"%m:%d:%Y")
+SCRIPTPATH=`dirname $(realpath $0)`
+mkdir ./$DOMAIN
+#echo $SCRIPTPATH
+echo "Performing DNS Recon on: " $DOMAIN
+echo "Tool sequence: theharvester, metagoofil, recon-ng"
+echo ""
+echo "Date/Time: " $stamp
 
+#Running classic whois
+#Running the Harvester
 echo -e "${GREEN}"
-echo -e "Performing DNS recon using Google's 4.2.2.1 Internet Server"
+echo -e "[+] Running classic qhois query..."
 echo -e "${NC}"
-#Pleaes use a valid dns server in order to avoid dns fake.
-dnsrecon -n 4.2.2.1 -d $TARGET > $TARGET.recon
+whois $DOMAIN | tee $DOMAIN/$DOMAIN.whois.recon
+echo "Done."
 
-
-#SOA, NS, A, AAAA, MX and SRV if AXRF on the NS servers fail.
+#Running the Harvester
 echo -e "${GREEN}"
-echo -e
+echo -e "[+] Running theharvester to gather domain names..."
 echo -e "${NC}"
-dnsrecon -d $TARGET -t std >> $TARGET.recon
-dnsrecon -d $TARGET -t rvl >> $TARGET.recon
-#Brute force domains and hosts using a given dictionary.
-dnsrecon -d $TARGET -t brt -D /opt/SecLists/Discovery/DNS/subdomains-top1mil-5000.txt >> $TARGET.recon
-#SRV records
-dnsrecon -d $TARGET -t srv >> $TARGET.recon
-#Test all NS servers for a zone transfer.
-dnsrecon -d $TARGET -t axfr >> $TARGET.recon
-#Perform Google search for subdomains and hosts.
-dnsrecon -d $TARGET -t goo >> $TARGET.recon
-#Remove the TLD of given domain and test against all TLDs registered in IANA.
-dnsrecon -d $TARGET -t tld >> $TARGET.recon
-#Perform a DNSSEC zone walk using NSEC records.
-dnsrecon -d $TARGET -t zonewalk >> $TARGET.recon
-#Search google, googleCSE, bing, bingapi, pgp, linkedin,google-profiles, jigsaw, twitter, googleplus, all
-theharvester -d $TARGET -b all >> $TARGET.recon
-#Perform a DNS reverse query on all ranges discovered
-theharvester -d $TARGET -n >> $TARGET.recon
-#Perform a DNS brute force for the domain name
-theharvester -d $TARGET -c >> $TARGET.recon
-#Perform a DNS TLD expansion discovery
-theharvester -d $TARGET -t >> $TARGET.recon
-##Specfic a dns server 
-theharvester -d $TARGET -e 8.8.8.8 >> $TARGET.recon
-#use SHODAN database to query discovered hosts
-theharvester -d $TARGET -h >> $TARGET.recon
+theharvester -d $DOMAIN -l 500 -b all -t -n -v | tee $DOMAIN/$DOMAIN.harvest.recon
+echo "Done."
 
+#Running Metagoofil on the domain
+echo -e "${GREEN}"
+echo -e "[+] Running Metagoofil to search for documents (doc,pdf,txt,xls,docx,xlsx)..."
+echo -e "${NC}"
+python /opt/metagoofil/metagoofil.py -d $DOMAIN -t doc,pdf,txt,xls,docx,xlsx -l 500 -n 50 -o files | tee "$DOMAIN/$DOMAIN.meta.recon"
+echo "Done."
 
-# Use domLink to discover additional hostnames
-/opt/DomLink/domLink.py -C $TARGET >> $TARGET.recon
+#Running recon-ng automation script
+echo -e "${GREEN}"
+echo -e "[+] Running recon-ng for advanced domain enumeration..."
+echo -e "${NC}"
+echo Target: $DOMAIN
+echo ""
+echo "workspaces select $DOMAIN" > /opt/CTFScripts/run.resource
+echo ""
+echo "set TIMEOUT 100" >> /opt/CTFScripts/run.resource
+echo "use recon/domains-hosts/hackertarget" >> /opt/CTFScripts/run.resource
+echo "set SOURCE $DOMAIN" >> /opt/CTFScripts/run.resource
+echo "run" >> /opt/CTFScripts/run.resource
+echo ""
+echo "set TIMEOUT 100" >> /opt/CTFScripts/run.resource
+echo "use recon/domains-hosts/baidu_site" >> /opt/CTFScripts/run.resource
+echo "set SOURCE $DOMAIN" >> /opt/CTFScripts/run.resource
+echo "run" >> /opt/CTFScripts/run.resource
+echo ""
+echo "use recon/domains-hosts/bing_domain_web" >> /opt/CTFScripts/run.resource
+echo "set SOURCE $DOMAIN" >> /opt/CTFScripts/run.resource
+echo "run" >> /opt/CTFScripts/run.resource
+echo ""
+echo "use recon/domains-hosts/google_site_web" >> /opt/CTFScripts/run.resource
+echo "set SOURCE $DOMAIN" >> /opt/CTFScripts/run.resource
+echo "run" >> /opt/CTFScripts/run.resource
+echo ""
+echo "use recon/domains-hosts/netcraft" >> /opt/CTFScripts/run.resource
+echo "set SOURCE $DOMAIN" >> /opt/CTFScripts/run.resource
+echo "run" >> /opt/CTFScripts/run.resource
+echo ""
+echo "use recon/domains-hosts/yahoo_domain" >> /opt/CTFScripts/run.resource
+echo "set SOURCE $DOMAIN" >> /opt/CTFScripts/run.resource
+echo "run" >> /opt/CTFScripts/run.resource
+echo ""
+echo "use recon/domains-hosts/vpnhunter" >> /opt/CTFScripts/run.resource
+echo "set SOURCE $DOMAIN" >> /opt/CTFScripts/run.resource
+echo "run" >> /opt/CTFScripts/run.resource
+echo ""
+echo "use recon/domains-hosts/brute_hosts" >> /opt/CTFScripts/run.resource
+echo "set WORDLIST /usr/share/recon-ng/data/sorted_knock_dnsrecon_fierce_recon-ng.txt" >> /opt/CTFScripts/run.resource
+echo "set SOURCE $DOMAIN" >> /opt/CTFScripts/run.resource
+echo "run" >> /opt/CTFScripts/run.resource
+echo ""
+echo "use recon/netblocks-companies/whois_orgs" >> /opt/CTFScripts/run.resource
+echo "set SOURCE $DOMAIN" >> /opt/CTFScripts/run.resource
+echo "run" >> /opt/CTFScripts/run.resource
+echo ""
+echo "use recon/hosts-hosts/resolve" >> /opt/CTFScripts/run.resource
+echo "set SOURCE default" >> /opt/CTFScripts/run.resource
+echo "run" >> /opt/CTFScripts/run.resource
+echo ""
+echo "use reporting/list" >> /opt/CTFScripts/run.resource
+echo "set FILENAME /opt/CTFScripts/$DOMAIN/$DOMAIN.lst" >> /opt/CTFScripts/run.resource
+echo "set COLUMN host" >> /opt/CTFScripts/run.resource
+echo "run" >> /opt/CTFScripts/run.resource
+echo ""
+echo "exit" >> /opt/CTFScripts/run.resource
+sleep 1
+echo ""
+recon-ng --no-check -r /opt/CTFScripts/run.resource
 
+#Running DNSEnum on the domain
+echo -e "${GREEN}"
+echo -e "[+] Running DNSEnum..."
+echo -e "${NC}"
+dnsenum -v -r --enum $DOMAIN  >> $DOMAIN/$DOMAIN.recon
+echo "Done."
 
-#Extract all raw hostnames discovered from the resulting file.
-cat $TARGET.recon | grep $TARGET | grep -v [*] | grep -v @ > $TARGET.hostnames
-cat $TARGET.recon | grep CNAME | awk {'print $3'} >> $TARGET.hostnames
+#Running DNSRecon on the domain
+echo -e "${GREEN}"
+echo -e "[+] Running DNSRecon..."
+echo -e "${NC}"
+dnsrecon -d $DOMAIN -a -s -z -t std,rvl,brt,srv,axfr,tld,snoop --threads 5 -D "/opt/SecLists/Discovery/DNS/subdomains-top1mil-5000.txt" >> $DOMAIN/$DOMAIN.recon
+echo "Done."
 
+#Running domLink on the domain
+echo -e "${GREEN}"
+echo -e "[+] Running domLink.py..."
+echo -e "${NC}"
+python /opt/DomLink/domLink.py -v -C aetna.com >> $DOMAIN/$DOMAIN.domlink.recon
+echo "Done."
 
-#Extract all email addresses discovered in the resulting file.
-cat $TARGET.recon | grep $TARGET | grep @ > $TARGET.emails
-
-
-#Extract all DNS records discovered from the resulting file.
-cat $TARGET.recon | grep TXT > $TARGET.records
-cat $TARGET.recon | grep MX >> $TARGET.records
-cat $TARGET.recon | grep SOA >> $TARGET.records
-cat $TARGET.recon | grep PTR >> $TARGET.records
-cat $TARGET.recon | grep SRV >> $TARGET.records
-
-
-# Updating Shodan
-# Configuring API Key
-#easy_install -U shodan
-
-
-
-
+# Consolidating into one file..
+echo -e "${GREEN}"
+echo -e "[+] Consolidating into one file..."
+echo -e "${NC}"
+cat /opt/CTFScripts/$DOMAIN/$DOMAIN.lst >> $DOMAIN/$DOMAIN.recon
+cat /opt/CTFScripts/$DOMAIN/$DOMAIN.whois.recon >> $DOMAIN/$DOMAIN.recon
+cat /opt/CTFScripts/$DOMAIN/$DOMAIN.harvest.recon >> $DOMAIN/$DOMAIN.recon
+cat /opt/CTFScripts/$DOMAIN/$DOMAIN.domlink.recon >> $DOMAIN/$DOMAIN.recon
+cat /opt/CTFScripts/$DOMAIN/$DOMAIN.meta.recon >> $DOMAIN/$DOMAIN.recon
+echo "Done."
