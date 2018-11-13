@@ -1,3 +1,9 @@
+#Programmer: Brent Chambers
+#Date: 11/13/2018
+#filename: console.py
+#Description: Interactive console that allows C&P data entry to perform operations on
+#	      hosts or IP's that have been entered into the system.
+
 import string, os
 from sets import Set
 import sys

@@ -14,6 +14,9 @@ echo -e "|    [Usage]: ./ftp_aic_enum.sh <TARGET> <PORT>  |"
 echo -e "+------------------------------------------------+"
 echo -e "${NC}"
 if [ $# == 0 ] ; then
+    echo -e "Currently performs all NSE ftp-* service enumeration on the provided"
+    echo -e "target system and port specification.  Output is stored in a local"
+    echo -e "directory named after the target specification provided.
     exit 1; fi
 
 IP="$1"
