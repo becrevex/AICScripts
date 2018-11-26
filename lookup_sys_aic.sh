@@ -14,14 +14,25 @@ echo -e "|         [Usage]: ./lookup_sys_aic.sh <SYSCALL>            |"
 echo -e "+----------------------------------------------------------+"
 if [ $# == 0 ] ; then
     echo -e "Supply a syscall to lookup."
-    echo -e "Example: lookup_sys_aic.sh write"
+    echo -e "Example: lookup_sys_aic.sh all|write"
     exit 1; fi
 
 SYSCALL="$1"
 
-echo -e "${GREEN}"
-echo -e " [+] Looking up supplied syscall..."
-cat /usr/include/i386-linux-gnu/asm/unistd_64.h | grep $1
-sed -n '/NAME/,/DESCRIPTION/p' mantest
-echo -e "${NC}"
+if [ "$SYSCALL" == "all" ]; then
+	echo -e "${GREEN}"
+	echo -e "Listing Platform System Calls..."
+	echo -e "${NC}"
+	cat /usr/include/i386-linux-gnu/asm/unistd_64.h | awk -F"__NR_" '{print $2}'
+else
+	echo -e "${GREEN}"
+	echo -e " [+] Looking up supplied syscall..."
+	echo -e "${NC}"
+	cat /usr/include/i386-linux-gnu/asm/unistd_64.h | grep $1 | awk -F"__NR_" '{print $2}'
 
+	echo -e "${GREEN}"
+	echo -e " [+] Type the syscall to review..."
+	echo -e "${NC}"
+	read SYSCALLSELECTION
+	man 2 $SYSCALLSELECTION | sed -n '/NAME/,/DESCRIPTION/p' 
+fi
