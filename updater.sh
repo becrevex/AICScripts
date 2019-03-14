@@ -41,6 +41,15 @@ echo -e "${NC}"
 cd /usr/share/exploitdb
 searchsploit -u
 
+#### Update SecLists
+echo -e "${GREEN}"
+echo -e "Updating SecLists..."
+echo -e "${NC}"
+cd /opt/SecLists
+git pull
+
+
+
 #cd /usr/share/exploitdb
 #wget https://github.com/offensive-security/exploit-database/archive/master.zip
 #unzip -o master.zip

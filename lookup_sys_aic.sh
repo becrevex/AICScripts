@@ -14,7 +14,7 @@ echo -e "|         [Usage]: ./lookup_sys_aic.sh <SYSCALL>            |"
 echo -e "+----------------------------------------------------------+"
 if [ $# == 0 ] ; then
     echo -e "Supply a syscall to lookup."
-    echo -e "Example: lookup_sys_aic.sh all|write"
+    echo -e "Example: lookup_sys_aic.sh write"
     exit 1; fi
 
 SYSCALL="$1"

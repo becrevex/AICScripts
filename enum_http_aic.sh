@@ -34,7 +34,7 @@ echo -e "${GREEN}"
 echo -e "Running nikto on the target..."
 echo -e "${NC}"
 ## Run nikto on the target system
-nikto -h $IP -p $PORT | tee $IP/nikto_$IP-$PORT
+nikto -h http://$IP -p $PORT | tee $IP/nikto_$IP-$PORT
 
 echo -e "${GREEN}"
 echo -e "Running gobuster for RobotsDisallowed on the target..."

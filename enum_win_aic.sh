@@ -23,7 +23,12 @@ mkdir ./$IP
 echo $SCRIPTPATH
 
 echo -e "${GREEN}"
-echo -e "Performing standard nmap Windows enumeration..."
+echo -e "Performing NetBIOS Scan..."
+echo -e "${NC}"
+nbtscan $IP
+
+echo -e "${GREEN}"
+echo -e "Performing NSE vulnerability scan for Windows/SMB..."
 echo -e "${NC}"
 # Performing standard nmap Windows enumeration on target...
 nmap -n -vv -Pn -sV $IP -pT:139,445,U:137 --script='smb-*' -oA $IP/smb_enum_$IP-$PORT.aic 

