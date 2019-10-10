@@ -68,7 +68,7 @@ elif [ "$SERVERTYPE" == "smb"  ]; then
 
 else
         echo "Please provide a useful file transfer server type."
-	echo "Current Sniff Types: http|ftp|smb"
+	echo "Current transfer methods: all|http|ftp|smb"
 
 fi
 
