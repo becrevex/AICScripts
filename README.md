@@ -12,17 +12,22 @@ $ git clone https://github.com/becrevex/AICScripts.git
   overflow:hidden;padding:10px 5px;word-break:normal;}
 .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
   font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-1wig{font-weight:bold;text-align:left;vertical-align:top}
 .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
 .tg .tg-73oq{border-color:#000000;text-align:left;vertical-align:top}
 </style>
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky">atk</th>
-    <th class="tg-73oq">an active technique performed in an offensive manner</th>
+    <th class="tg-1wig">PREFIX<br></th>
+    <th class="tg-1wig">DESCRIPTION<br></th>
   </tr>
 </thead>
 <tbody>
+  <tr>
+    <td class="tg-0pky">atk</td>
+    <td class="tg-73oq">an active technique performed in an offensive manner</td>
+  </tr>
   <tr>
     <td class="tg-0pky">dns</td>
     <td class="tg-0pky">dns related technique or activity</td>
