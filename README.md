@@ -1,11 +1,11 @@
 # AIC Scripts Collection
 Operational Security Automation Scripts for a Standard Kali Build
 
-#Installation
+# Installation
 Take care of the dependencies:<br>
 $ git clone https://github.com/becrevex/AICScripts.git
 
-#Current Script Descriptions
+# Current Script Descriptions
 
 
 Kampai: Custom Kenna Connector for single or bulk import.<br>
