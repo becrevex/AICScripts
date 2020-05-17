@@ -72,6 +72,14 @@ $ git clone https://github.com/becrevex/AICScripts.git
 
 # Current Script Descriptions
 <table class="tg">
+  <table class="tg">
+<thead>
+  <tr>
+    <th class="tg-1pky">FILENAME<br></th>
+    <th class="tg-1pky">DESCRIPTION<br></th>
+    <th class="tg-1pky">STATUS<br></th>
+  </tr>
+</thead>
 <thead>
   <tr>
     <th class="tg-0pky">atk_brute_aic.sh</th>
