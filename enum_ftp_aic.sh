@@ -10,13 +10,18 @@ echo -e "${YELLOW}"
 echo -e "+------------------------------------------------+"
 echo -e "| Adversarial Informatics Combat FTP Enumeration |"
 echo -e "|            cygienesolutions.com                |"
-echo -e "|    [Usage]: ./ftp_aic_enum.sh <TARGET> <PORT>  |"
+echo -e "|    [Usage]: ./enum_ftp_aic.sh <TARGET> <PORT>  |"
 echo -e "+------------------------------------------------+"
 echo -e "${NC}"
 if [ $# == 0 ] ; then
+    echo -e "${GREEN}"
+    echo -e "Description:"
     echo -e "Currently performs all NSE ftp-* service enumeration on the provided"
     echo -e "target system and port specification.  Output is stored in a local"
-    echo -e "directory named after the target specification provided.
+    echo -e "directory named after the target specification provided."
+    echo -e ""
+    echo -e "[Usage]: ./enum_ftp_aic.sh 192.168.1.44 21"
+    echo -e "${NC}"
     exit 1; fi
 
 IP="$1"
