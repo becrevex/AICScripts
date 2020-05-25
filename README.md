@@ -80,14 +80,12 @@ $ git clone https://github.com/becrevex/AICScripts.git
     <th class="tg-1pky">STATUS<br></th>
   </tr>
 </thead>
-<thead>
+<tbody>
   <tr>
     <th class="tg-0pky">atk_brute_aic.sh</th>
     <th class="tg-0pky">Common brute force script for multiple protocols and services.&nbsp;&nbsp;</th>
     <th class="tg-0pky"></th>
   </tr>
-</thead>
-<tbody>
   <tr>
     <td class="tg-0pky">atk_ms_aic.sh</td>
     <td class="tg-0pky">Attempts common Windows exploits against the target.</td>
